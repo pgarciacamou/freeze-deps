@@ -33,6 +33,7 @@
     }
   },
   "dependencies": {
+    "commander": "^2.20.0",
     "jsonfile": "^5.0.0"
   },
   "peerDependencies": {
