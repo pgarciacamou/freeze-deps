@@ -32,8 +32,12 @@
       "pre-commit": "lint-staged"
     }
   },
-  "dependencies": {},
-  "peerDependencies": {},
+  "dependencies": {
+    "jsonfile": "^5.0.0"
+  },
+  "peerDependencies": {
+    "fs": "0.0.1-security"
+  },
   "devDependencies": {
     "@svgr/rollup": "^2.4.1",
     "babel-core": "^6.26.3",
