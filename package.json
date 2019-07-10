@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "pgarciacamou/freeze-deps",
   "main": "dist/index.js",
+  "bin": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "engines": {
