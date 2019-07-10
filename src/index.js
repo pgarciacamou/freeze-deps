@@ -1,7 +1,7 @@
 import jsonfile from 'jsonfile';
 import fs from 'fs';
 
-function fileExists(path) {
+export function fileExists(path) {
   try {
     if (fs.existsSync(path)) {
       return true;
@@ -11,22 +11,19 @@ function fileExists(path) {
   }
 }
 
-export function freezeDeps(jsonPath, lockPath, options = {}) {
-  if (!fileExists(jsonPath)) {
-    throw new Error(
-      `File package.json not found, file path received: ${jsonPath}`
-    );
+export function readJSON(file) {
+  if (!fileExists(file)) {
+    throw new Error(`File not found. Path received: ${file}`);
   }
+  return jsonfile.readFileSync(file);
+}
 
-  if (!fileExists(lockPath)) {
-    throw new Error(
-      `File package-lock.json not found, file path received: ${lockPath}`
-    );
-  }
+export function writeJSON(file, obj, cb = err => err && console.error(err)) {
+  return jsonfile.writeFile(file, obj, { spaces: 2 }, cb);
+}
 
-  const packageJSON = jsonfile.readFileSync(jsonPath);
-  const packageLock = jsonfile.readFileSync(lockPath);
-  const newJSON = { ...packageJSON };
+export function freezeDeps(packageJSON, packageLock, options = {}) {
+  let newJSON = { ...packageJSON };
 
   for (let dependencyName in packageJSON.dependencies) {
     const currentDep = packageLock.dependencies[dependencyName];
@@ -40,25 +37,34 @@ export function freezeDeps(jsonPath, lockPath, options = {}) {
     newJSON.dependencies[dependencyName] = currentDep.version;
   }
 
-  jsonfile.writeFile(jsonPath, newJSON, { spaces: 2 }, function(err) {
-    if (err) console.error(err);
-  });
+  return newJSON;
 }
 
 // Check if module is executed in the terminal or imported into another node module.
 if (require.main === module) {
   const program = require('commander');
-  const jsonDefaultPath = `${process.env.PWD}/package.json`;
-  const lockDefaultPath = `${process.env.PWD}/package-lock.json`;
+  const defaults = {
+    jsonPath: `${process.env.PWD}/package.json`,
+    lockPath: `${process.env.PWD}/package-lock.json`
+  };
 
   program
     .version('0.1.0')
     // .usage('[OPTIONS]...')
-    .option('-j, --json [value]', 'Set package.json path', jsonDefaultPath)
-    .option('-l, --lock [value]', 'Set package-lock.json path', lockDefaultPath)
+    .option('-j, --json [value]', 'Set package.json path', defaults.jsonPath)
+    .option(
+      '-l, --lock [value]',
+      'Set package-lock.json path',
+      defaults.lockPath
+    )
     .parse(process.argv);
 
-  freezeDeps(program.json, program.lock);
+  const packageJSON = readJSON(program.json);
+  const packageLock = readJSON(program.lock);
+
+  const newJSON = freezeDeps(packageJSON, packageLock);
+
+  writeJSON(program.json, newJSON);
 } else {
   // Ran as a node module
 }

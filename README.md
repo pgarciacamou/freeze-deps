@@ -52,11 +52,15 @@ npm install --save freeze-deps
 ```js
 import { freezeDeps } from 'freeze-deps';
 
-const pathToPackageJSON = "...";
-const pathToPackageLockJSON = "...";
+const packageJSON = {
+  dependencies: {}
+};
+const packageLock = {
+  dependencies: {}
+};
 
 try {
-  freezeDeps(pathToPackageJSON, pathToPackageLockJSON);
+  const newPackageJSON = freezeDeps(packageJSON, packageLock);
 } catch (ex) {
   console.error(ex);
 }
@@ -66,6 +70,7 @@ try {
 
 1. Instead of freezing to an exact version, add another argument that allow adding a patch ("~") prefix. E.g. from the example at the top, `"react": "~16.1.0"`.
 2. Allow changing not only dependencies but peer and dev dependencies.
+3. Allow passing json formatting arguments. E.g. "spaces".
 
 ## License
 
