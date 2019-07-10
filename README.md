@@ -1,9 +1,8 @@
 # freeze-deps
 
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)[![NPM](https://img.shields.io/npm/v/freeze-deps.svg)](https://www.npmjs.com/package/freeze-deps) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 > Using package-lock.json, determine the current installed version of the dependencies and replace it in package.json with the exact version.
-
-[![NPM](https://img.shields.io/npm/v/freeze-deps.svg)](https://www.npmjs.com/package/freeze-deps) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
 
 E.g.
 ```bash
@@ -75,3 +74,19 @@ try {
 ## License
 
 MIT © [pgarciacamou](https://github.com/pgarciacamou)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.pgarciacamou.dev"><img src="https://avatars3.githubusercontent.com/u/8354571?v=4" width="100px;" alt="Pablo Garcia"/><br /><sub><b>Pablo Garcia</b></sub></a><br /><a href="https://github.com/pgarciacamou/freeze-deps/commits?author=pgarciacamou" title="Code">💻</a> <a href="https://github.com/pgarciacamou/freeze-deps/commits?author=pgarciacamou" title="Documentation">📖</a> <a href="https://github.com/pgarciacamou/freeze-deps/commits?author=pgarciacamou" title="Tests">⚠️</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "pgarciacamou",
+      "name": "Pablo Garcia",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8354571?v=4",
+      "profile": "https://www.pgarciacamou.dev",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "freeze-deps",
+  "projectOwner": "pgarciacamou",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
