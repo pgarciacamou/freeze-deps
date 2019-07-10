@@ -44,3 +44,21 @@ export function freezeDeps(jsonPath, lockPath, options = {}) {
     if (err) console.error(err);
   });
 }
+
+// Check if module is executed in the terminal or imported into another node module.
+if (require.main === module) {
+  const program = require('commander');
+  const jsonDefaultPath = `${process.env.PWD}/package.json`;
+  const lockDefaultPath = `${process.env.PWD}/package-lock.json`;
+
+  program
+    .version('0.1.0')
+    // .usage('[OPTIONS]...')
+    .option('-j, --json [value]', 'Set package.json path', jsonDefaultPath)
+    .option('-l, --lock [value]', 'Set package-lock.json path', lockDefaultPath)
+    .parse(process.argv);
+
+  freezeDeps(program.json, program.lock);
+} else {
+  // Ran as a node module
+}
