@@ -1,6 +1,6 @@
 # freeze-deps
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)[![NPM](https://img.shields.io/npm/v/freeze-deps.svg)](https://www.npmjs.com/package/freeze-deps) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) [![NPM](https://img.shields.io/npm/v/freeze-deps.svg)](https://www.npmjs.com/package/freeze-deps) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 > Using package-lock.json, determine the current installed version of the dependencies and replace it in package.json with the exact version.
 
@@ -70,6 +70,9 @@ try {
 1. Instead of freezing to an exact version, add another argument that allow adding a patch ("~") prefix. E.g. from the example at the top, `"react": "~16.1.0"`.
 2. Allow changing not only dependencies but peer and dev dependencies.
 3. Allow passing json formatting arguments. E.g. "spaces".
+4. Add a way to run this with yarn-lock.json
+5. Add whitelist and blacklist arguments to skip certain packages or only update certain packages. This could be done with regexp.
+6. Allow changing some packages to ^, others to ~, etc. Although this could be done with separate commands using a whitelist and a prefix argument.
 
 ## License
 
