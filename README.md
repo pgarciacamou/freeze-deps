@@ -4,23 +4,7 @@
 
 > Using package-lock.json, determine the current installed version of the dependencies and replace it in package.json with the exact version.
 
-E.g.
-```bash
-# package.json
-{ dependencies: { react: "^16.0.0" } }
-
-# package-lock.json
-{ dependencies: { react: { version: "16.1.0" } } }
-
-# result package.json
-{ dependencies: { react: "16.1.0" } }
-```
-
-I created this module to avoid manually having to freeze dependencies for big JS apps.
-
-Because there is no restriction towards how the developers of a certain package handle versioning, projects can easily break if one dependency upgrades a minor or patch but should have been a major.
-
-I intended this module to be used on big projects where refactoring based on a small dependency can consume serious resources.
+I created this module to avoid manually having to freeze dependencies in `package.json` for big JS apps. Currently, there is no restriction towards how the developers of a certain package handle versioning, projects can easily break if one dependency upgrades a minor or patch but should have been a major. I intended this module to be used on big projects where refactoring based on a small dependency can consume serious resources.
 
 ## Usage
 
@@ -41,6 +25,29 @@ Alternatively
 npm install -g freeze-deps
 freeze-deps <args>
 ```
+
+#### Options
+
+You can get this list by running `npx freeze-deps --help`.
+
+<table>
+  <tr>
+    <td>-V, --version</td>
+    <td>output the version number</td>
+  </tr>
+  <tr>
+    <td>-j, --json [value]</td>
+    <td>Set package.json path (default: "< root dir >/package.json")</td>
+  </tr>
+  <tr>
+    <td>-l, --lock [value]</td>
+    <td>Set package-lock.json path (default: "< root dir >/package-lock.json")</td>
+  </tr>
+  <tr>
+    <td>-h, --help</td>
+    <td>output usage information</td>
+  </tr>
+</table>
 
 ### Node
 
@@ -63,6 +70,22 @@ try {
 } catch (ex) {
   console.error(ex);
 }
+```
+
+### Example
+
+```bash
+# project-root-dir/package.json
+{ dependencies: { react: "^16.0.0" } }
+
+# project-root-dir/package-lock.json
+{ dependencies: { react: { version: "16.1.0" } } }
+
+npx freeze-deps
+# same as: npx freeze-deps -j ./package.json -l ./package-lock.json
+# 
+# project-root-dir/package.json
+{ dependencies: { react: "16.1.0" } }
 ```
 
 ## Next
