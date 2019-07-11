@@ -17,6 +17,12 @@ export default {
       sourcemap: true
     },
     {
+      banner: '#!/usr/bin/env node',
+      file: pkg.bin,
+      format: 'cjs',
+      sourcemap: true
+    },
+    {
       file: pkg.module,
       format: 'es',
       sourcemap: true

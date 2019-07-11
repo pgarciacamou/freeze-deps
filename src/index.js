@@ -49,7 +49,7 @@ if (require.main === module) {
   };
 
   program
-    .version('0.1.0')
+    .version('0.3.0')
     // .usage('[OPTIONS]...')
     .option('-j, --json [value]', 'Set package.json path', defaults.jsonPath)
     .option(
