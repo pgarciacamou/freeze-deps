@@ -44,6 +44,10 @@ You can get this list by running `npx freeze-deps --help`.
     <td>Set package-lock.json path (default: "< root dir >/package-lock.json")</td>
   </tr>
   <tr>
+    <td>-p, --prop [value]</td>
+    <td>Property from package.json to freeze (default: "dependencies")</td>
+  </tr>
+  <tr>
     <td>-h, --help</td>
     <td>output usage information</td>
   </tr>
@@ -91,7 +95,7 @@ npx freeze-deps
 ## Next
 
 1. Instead of freezing to an exact version, add another argument that allow adding a patch ("~") prefix. E.g. from the example at the top, `"react": "~16.1.0"`.
-2. Allow changing not only dependencies but peer and dev dependencies.
+2. ~~Allow changing not only dependencies but peer and dev dependencies.~~ **Added in v0.5.0**.
 3. Allow passing json formatting arguments. E.g. "spaces".
 4. Add a way to run this with yarn-lock.json
 5. Add whitelist and blacklist arguments to skip certain packages or only update certain packages. This could be done with regexp.

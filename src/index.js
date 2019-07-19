@@ -22,10 +22,14 @@ export function writeJSON(file, obj, cb = err => err && console.error(err)) {
   return jsonfile.writeFile(file, obj, { spaces: 2 }, cb);
 }
 
-export function freezeDeps(packageJSON, packageLock, options = {}) {
+export function freezeDeps(
+  packageJSON,
+  packageLock,
+  { jsonProp = 'dependencies' } = {}
+) {
   let newJSON = { ...packageJSON };
 
-  for (let dependencyName in packageJSON.dependencies) {
+  for (let dependencyName in packageJSON[jsonProp]) {
     const currentDep = packageLock.dependencies[dependencyName];
 
     // Skip dependencies not found in package-lock because we can't assume
@@ -34,7 +38,7 @@ export function freezeDeps(packageJSON, packageLock, options = {}) {
       continue;
     }
 
-    newJSON.dependencies[dependencyName] = currentDep.version;
+    newJSON[jsonProp][dependencyName] = currentDep.version;
   }
 
   return newJSON;
@@ -45,11 +49,12 @@ if (require.main === module) {
   const program = require('commander');
   const defaults = {
     jsonPath: `${process.env.PWD}/package.json`,
-    lockPath: `${process.env.PWD}/package-lock.json`
+    lockPath: `${process.env.PWD}/package-lock.json`,
+    jsonProp: 'dependencies'
   };
 
   program
-    .version('0.4.1')
+    .version('0.5.0')
     // .usage('[OPTIONS]...')
     .option('-j, --json [value]', 'Set package.json path', defaults.jsonPath)
     .option(
@@ -57,12 +62,19 @@ if (require.main === module) {
       'Set package-lock.json path',
       defaults.lockPath
     )
+    .option(
+      '-p, --prop [value]',
+      'Property from package.json to freeze',
+      defaults.jsonProp
+    )
     .parse(process.argv);
 
   const packageJSON = readJSON(program.json);
   const packageLock = readJSON(program.lock);
 
-  const newJSON = freezeDeps(packageJSON, packageLock);
+  const newJSON = freezeDeps(packageJSON, packageLock, {
+    jsonProp: program.prop
+  });
 
   writeJSON(program.json, newJSON);
 } else {
